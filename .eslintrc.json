@@ -1,0 +1,60 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "off",
+            4
+        ],
+        "linebreak-style": [
+            "off",
+            "unix"
+        ],
+        "quotes": [
+            "off",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console": "off",
+        "no-debugger": "warn",
+        "no-empty": "warn",
+        "no-extra-boolean-cast":"warn",
+        "array-callback-return": "warn",
+        "block-scoped-var": "error",
+        "consistent-return": "error",
+        "curly": "warn",
+        "eqeqeq": "warn",
+        "no-fallthrough": "warn",
+        "no-loop-func": "warn",
+        "no-new-wrappers": "warn",
+        "no-unused-expressions": "warn",
+        "no-unused-vars": "warn",
+        "no-with": "error",
+        "prefer-promise-reject-errors": [
+            "warn", {
+                "allowEmptyReject": true
+            }
+        ],
+        "strict": "warn",
+        "no-shadow": "error",
+        "no-shadow-restricted-names": "error",
+        "no-use-before-define": "error",
+        "no-buffer-construtor": "warn",
+        "no-path-concat": "warn",
+        "brace-style": [
+            "1tbs", {
+                "allowSingleLine": true
+            }
+        ],
+        "no-var": "warn"
+    }
+}
