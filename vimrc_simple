@@ -1,0 +1,29 @@
+syntax on
+
+set nu
+set nocp
+set nobk
+set noswapfile
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set ic
+"set smartindent
+"set cursorline
+
+set laststatus=2
+set fileencodings=ucs-bom,utf-8,gbk,default,latin1
+
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+map \p "_diwP
