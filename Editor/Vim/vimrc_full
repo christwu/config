@@ -1,0 +1,542 @@
+" ==================================================
+"" vimrc
+""
+"" 部分代码来自 http://vim-bootstrap.com
+""      (https://github.com/avelino/vim-bootstrap)
+" ==================================================
+
+" ==================================================
+"" 处理多平台兼容
+" ==================================================
+if (has('win32') || has('win64'))
+    let g:isWindows = 1
+else
+    let g:isWindows = 0
+endif
+
+if has('gui_running')
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+end
+
+" ==================================================
+"" 插件 (Vundle)
+" ==================================================
+
+set nocp
+filetype off
+
+if g:isWindows
+    set shell=cmd
+    set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+    let path='~/vimfiles/bundle'
+    call vundle#begin(path)
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+endif
+
+Plugin 'VundleVim/Vundle.vim'
+
+" --------------------
+"" 语言无关
+" --------------------
+" 「Git集成」：后面有详细配置
+Plugin 'tpope/vim-fugitive'
+" 「Dash」：用:Dash激活。只支持Mac。
+Plugin 'rizzatti/dash.vim'
+" 「快速注释」：gc注释/取消
+Plugin 'tpope/vim-commentary'
+" 「树状显示文件」：:NERDTreeToggle调出
+Plugin 'scrooloose/nerdtree'
+" 「在NerdTree上显示Git状态」（F2、F3）
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+" 「使NerdTree和Tab协同工作」：用:NERDTreeTabsToggle
+"Plugin 'jistr/vim-nerdtree-tabs'
+" 「撤销树」
+Plugin 'mbbill/undotree'
+" 「文件模糊匹配」：:CtrlP调出
+Plugin 'ctrlpvim/ctrlp.vim'
+" 「自动显示Git改动」
+Plugin 'airblade/vim-gitgutter'
+" 「语言包集合」：多种语法高亮支持
+Plugin 'sheerun/vim-polyglot'
+" 「grep集成」：:Grep
+Plugin 'vim-scripts/grep.vim'
+" 「使GVim主题在终端中实现」
+Plugin 'vim-scripts/CSApprox'
+" 「高亮行末的空格」：:FixWhitespace清理
+Plugin 'bronson/vim-trailing-whitespace'
+" 「自动补括号」
+Plugin 'jiangmiao/auto-pairs'
+" 「显示符号（ctags）列表」：:TagbarToggle
+Plugin 'majutsushi/tagbar'
+" 「语法检查」
+Plugin 'scrooloose/syntastic'
+" 「异步执行」
+"Plugin 'Shougo/vimproc.vim', {
+"      \ 'build' : {
+"      \     'windows' : 'tools\\update-dll-mingw',
+"      \     'cygwin' : 'make -f make_cygwin.mak',
+"      \     'mac' : 'make -f make_mac.mak',
+"      \     'unix' : 'make -f make_unix.mak',
+"      \    },
+"      \ }
+" 「自动对齐」：例如:Tab /|
+Plugin 'godlygeek/tabular'
+" 「括号」：增加、删除、修改括号或引号
+Plugin 'tpope/vim-surround'
+" 「自动补括号」
+Plugin 'spf13/vim-autoclose'
+" 「会话」：:SaveSession、:OpenSession
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+" 「在Vim内调出终端」：:VimShell
+Plugin 'Shougo/vimshell.vim'
+" 「一键运行脚本」：:sx
+Plugin 'ironcamel/vim-script-runner'
+" 「代码片段」
+Plugin 'SirVer/ultisnips'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'honza/vim-snippets'
+" 一些函数
+Plugin 'vim-scripts/L9'
+" 「Doxygen风格注释」
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+" 「重复」，用.重复一些插件的命令
+Plugin 'tpope/vim-repeat'
+" VimWiki，就像Wikipedia那样
+Plugin 'vimwiki/vimwiki'
+" 「自动补全」：支持C/C++/ObjC/C#/Python/JS/Go，部分支持Ruby
+"               额外要求：Vim>=7.4、Python 2.7.10、cmake
+"               C/C++/ObjC：clang
+"               C#：Mono
+"               JS：Node.js，npm install ternjs（并在项目中配置好）
+"               Go：Go
+Plugin 'Valloric/YouCompleteMe'
+
+" --------------------
+"" 美观
+" --------------------
+" 颜色
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'chriskempson/base16-vim'
+Plugin 'nanotech/jellybeans.vim'
+" 状态栏（set laststatus=2显示）
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" source /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+
+" --------------------
+"" 语言支持
+" --------------------
+" MATLAB
+Plugin 'djoshea/vim-matlab'
+Plugin 'djoshea/vim-matlab-fold'
+" Latex Suite
+Plugin 'vim-scripts/LaTeX-Suite-aka-Vim-LaTeX'
+
+" --------------------
+"" C
+" --------------------
+" 「切换.c和.h」：:A、:AS、:AV……
+" Plugin 'vim-scripts/a.vim'
+" 「快速输入」
+Plugin 'vim-scripts/c.vim'
+
+" --------------------
+"" Python
+" --------------------
+" ?
+Plugin 'Yggdroot/indentLine'
+
+" --------------------
+"" HTML/JavaScript
+" --------------------
+" 「自动闭合标签」
+Plugin 'amirh/HTML-AutoCloseTag'
+" 「HTML快速输入」：按<C-Y>,激活
+Plugin 'mattn/emmet-vim'
+" 「CSS颜色显示」
+Plugin 'gorodinskiy/vim-coloresque'
+" 「相关语言」
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'tpope/vim-haml'
+
+" --------------------
+"" PHP
+" --------------------
+" 「代码补全」
+Plugin 'spf13/PIV'
+
+" --------------------
+"" Ruby
+" --------------------
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-projectionist'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'ecomba/vim-ruby-refactoring'
+
+" --------------------
+"" Go
+" --------------------
+Plugin 'fatih/vim-go'
+
+"" Include user's extra bundle
+if g:isWindows
+    if filereadable(expand("$HOME/_vimrc.local.plugins"))
+        source $HOME/_vimrc.local.plugins
+    endif
+else
+    if filereadable(expand("~/.vimrc.local.plugins"))
+        source ~/.vimrc.local.plugins
+    endif
+endif
+
+call vundle#end()
+filetype plugin indent on
+
+
+
+" ==================================================
+"" 编辑器参数
+" ==================================================
+
+"" 行为
+set nocompatible
+set nobackup            " 不要生成备份文件
+set noswapfile          " 不要生成.swp文件
+syntax on               " 语法高亮
+set backspace=indent,eol,start   "这指明在插入模式下在哪里允许<BS>删除光标前面的字符。
+" 逗号分隔的三个值分别指：行首的空白字符，换行符和插入模式开始处之前的字符。
+set mouse=a
+set mousemodel=popup
+set ttyfast
+
+"" Tab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab           " 用空格代替Tab
+set smartindent         " 自动缩进
+
+"" 界面
+set number              " 显示行号
+set showcmd
+"set ruler               " 显示光标位置（被插件取代）
+set cursorline          " 高亮当前行
+set gcr=a:blinkon0      " 禁止光标闪烁
+set t_Co=256            " 终端256色支持
+set laststatus=2        " 状态栏
+if (!g:isWindows) || g:isGUI
+    colorscheme jellybeans
+endif
+if has("gui_running")
+    if g:isWindows
+        "set guifontwide=Microsoft\ YaHei\ Mono:h11
+        set guifont=Source Code Pro for Powerline 10
+        set guioptions=m
+        set lines=30
+        set columns=150
+    else
+        set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+    endif
+    if has("gui_mac") || has("gui_macvim")
+        set transparency=5
+    endif
+endif
+
+"" 编码
+set encoding=utf-8
+set fileencoding=utf-8
+set fileformat=unix
+set fileformats=unix,dos,mac
+" 修复Windows中文乱码
+let &termencoding=&encoding
+set fileencodings=utf-8,gbk,ucs-bom,cp936
+
+if g:isWindows && g:isGUI
+    " 解决菜单乱码
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+
+    " 终端输出乱码
+    language messages zh_CN.utf-8
+endif
+
+"" 修复缩写
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+
+" ==================================================
+"" 插件参数
+" ==================================================
+
+"" 会话
+let g:session_directory = "~/.vim/session"
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+let g:session_command_aliases = 1
+
+"" 状态栏
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
+
+" vim-airline
+let g:airline_theme = 'base16'
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
+let g:airline_powerline_fonts = 1
+
+"" YouCompleteMe
+let g:ycm_confirm_extra_conf = 0
+let g:syntastic_always_populate_loc_list = 1
+
+"" NERDTree
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeWinSize = 50
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+nnoremap <silent> <F2> :NERDTreeFind<CR>
+noremap <F3> :NERDTreeToggle<CR>
+
+" grep.vim
+nnoremap <silent> <leader>f :Rgrep<CR>
+let Grep_Default_Options = '-IR'
+let Grep_Skip_Files = '*.log *.db'
+let Grep_Skip_Dirs = '.git node_modules'
+
+" vimshell.vim
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_prompt =  '$ '
+
+nnoremap <silent> <leader>sh :VimShellCreate<CR>
+
+"" LaTeX
+let g:tex_flavor='latex'
+let g:Tex_CompileRule_pdf='xelatex --interaction=nonstopmode $*'
+let g:Tex_MultipleCompileFormats='pdf'
+set iskeyword+=:
+
+"" 自定义脚本
+let g:script_runner_key = '<F6>'
+let g:script_runner_javascript = 'node'
+
+"" ctrlp.vim
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+let g:ctrlp_use_caching = 1
+cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+noremap <leader>b :CtrlPBuffer<CR>
+let g:ctrlp_map = '<leader>e'
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore '+ g:ctrlp_custom_ignore +' -g ""'
+endif
+
+" snippets
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<C-b>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
+
+" syntastic
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_auto_loc_list=1
+let g:syntastic_aggregate_errors = 1
+
+let g:syntastic_python_checkers=['python', 'flake8']
+let g:syntastic_python_flake8_post_args='--ignore=W391'
+
+" PIV
+let g:DisableAutoPHPFolding = 0
+let g:PIVAutoClose = 0
+
+" Tagbar
+nmap <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+
+" Ruby
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1
+let g:rubycomplete_rails = 1
+
+" Doxygen
+noremap <leader>d :Dox<CR>
+
+augroup vimrc-ruby
+  autocmd!
+  autocmd BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
+  autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2 smartindent
+augroup END
+
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+" Ruby refactory
+nnoremap <leader>rap  :RAddParameter<cr>
+nnoremap <leader>rcpc :RConvertPostConditional<cr>
+nnoremap <leader>rel  :RExtractLet<cr>
+vnoremap <leader>rec  :RExtractConstant<cr>
+vnoremap <leader>relv :RExtractLocalVariable<cr>
+nnoremap <leader>rit  :RInlineTemp<cr>
+vnoremap <leader>rrlv :RRenameLocalVariable<cr>
+vnoremap <leader>rriv :RRenameInstanceVariable<cr>
+vnoremap <leader>rem  :RExtractMethod<cr>
+
+
+" ==================================================
+"" 快捷键
+" ==================================================
+" Split
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
+
+"" Git
+noremap <Leader>ga :Gwrite<CR>
+noremap <Leader>gj :Gcommit<CR>
+noremap <Leader>gsh :Gpush<CR>
+noremap <Leader>gll :Gpull<CR>
+noremap <Leader>gs :Gstatus<CR>
+noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gd :Gvdiff<CR>
+noremap <Leader>gr :Gremove<CR>
+
+"" UndoTree
+noremap <leader>u :UndotreeToggle<CR>
+
+" session management
+nnoremap <leader>so :OpenSession<Space>
+nnoremap <leader>ss :SaveSession<Space>
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+
+"" Tabs
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+nnoremap <silent> <S-t> :tabnew<CR>
+
+"" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>
+
+"" Opens an edit command with the path of the currently edited file filled in
+noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+"" Opens a tab edit command with the path of the currently edited file filled
+noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
+noremap YY "+y<CR>
+noremap <leader>p "+gP<CR>
+noremap XX "+x<CR>
+
+if has('macunix')
+  " pbcopy for OSX copy/paste
+  vmap <C-x> :!pbcopy<CR>
+  vmap <C-c> :w !pbcopy<CR><CR>
+endif
+
+"" Buffer nav
+noremap <leader>z :bp<CR>
+noremap <leader>q :bp<CR>
+noremap <leader>x :bn<CR>
+noremap <leader>w :bn<CR>
+
+"" Close buffer
+noremap <leader>c :bd<CR>
+
+"" Clean search (highlight)
+nnoremap <silent> <leader><space> :noh<cr>
+
+"" Switching windows
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
+"" Vmap for maintain Visual Mode after shifting > and <
+vmap < <gv
+vmap > >gv
+
+"" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+"" Open current line on GitHub
+noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
+
+"" Custom configs
+"" Include user's local vim config
+if g:isWindows
+    if filereadable(expand("$HOME/_vimrc.local"))
+        source $HOME/_vimrc.local
+    endif
+else
+    if filereadable(expand("~/.vimrc.local"))
+        source ~/.vimrc.local
+    endif
+endif
+
+"" Tabular
+nmap <Leader>a& :Tabularize /&<CR>
+vmap <Leader>a& :Tabularize /&<CR>
+nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+nmap <Leader>a=> :Tabularize /=><CR>
+vmap <Leader>a=> :Tabularize /=><CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a,, :Tabularize /,\zs<CR>
+vmap <Leader>a,, :Tabularize /,\zs<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+" ==================================================
+"" 其他
+" ==================================================
+set conceallevel=0

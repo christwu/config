@@ -1,0 +1,13 @@
+# Rime schema
+# encoding: utf-8
+
+patch:
+  "engine/processors":
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
