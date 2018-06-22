@@ -1,11 +1,11 @@
 {
     "env": {
-        "es6": true,
         "node": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "script",
+        "ecmaVersion": 8
     },
     "rules": {
         "indent": [
@@ -37,7 +37,11 @@
         "no-loop-func": "warn",
         "no-new-wrappers": "warn",
         "no-unused-expressions": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": [
+            "warn", {
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "no-with": "error",
         "prefer-promise-reject-errors": [
             "warn", {
@@ -48,7 +52,7 @@
         "no-shadow": "error",
         "no-shadow-restricted-names": "error",
         "no-use-before-define": "error",
-        "no-buffer-construtor": "warn",
+        "no-buffer-constructor": "warn",
         "no-path-concat": "warn",
         "brace-style": [
             "1tbs", {
